@@ -1,94 +1,148 @@
-const form = document.querySelector('#estimate-form');
-const steps = [...form.querySelectorAll('[data-step]')];
-const progress = [...document.querySelectorAll('.progress li')];
-const navigation = document.querySelector('#form-navigation');
-const back = document.querySelector('#back');
-const next = document.querySelector('#next');
-const error = document.querySelector('#form-error');
-const summary = document.querySelector('#estimate-summary');
-const sent = document.querySelector('#sent-message');
-let current = 0;
-
-function showStep(step, focus = true) {
-  current = step;
-  steps.forEach((panel, index) => { panel.hidden = index !== step; });
-  progress.forEach((dot, index) => {
-    dot.classList.toggle('complete', index < step);
-    if (index === step) dot.setAttribute('aria-current', 'step');
-    else dot.removeAttribute('aria-current');
-  });
-  navigation.hidden = false;
-  summary.hidden = true;
-  sent.hidden = true;
-  back.hidden = step === 0;
-  next.innerHTML = step === 4 ? 'Review my answers →' : 'Next →';
-  error.textContent = '';
-  if (focus) {
-    const legend = steps[step].querySelector('legend');
-    legend.tabIndex = -1;
-    legend.focus();
+(() => {
+  'use strict';
+  const menuButton = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('#site-menu');
+  function setMenu(open) {
+    menu.hidden = !open;
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.querySelector('use').setAttribute('href', `../shared/icons.svg#${open ? 'close' : 'menu'}`);
+    menuButton.querySelector('span').textContent = open ? 'Close menu' : 'Menu';
   }
-}
-
-function review() {
-  const answers = new FormData(form);
-  const rows = [
-    ['Job', answers.get('job')],
-    ['ZIP code', answers.get('zip')],
-    ['Rooms', answers.getAll('rooms').join(', ') || 'Not specified'],
-    ['Approximate size', answers.get('size').trim() || 'Not specified'],
-    ['Photo', form.elements.photo.files[0]?.name || 'No photo added'],
-    ['Name', answers.get('name').trim() || 'Not specified'],
-    ['Phone', answers.get('phone')]
-  ];
-  const list = document.querySelector('#summary-list');
-  list.replaceChildren();
-  rows.forEach(([label, value]) => {
-    const dt = document.createElement('dt');
-    const dd = document.createElement('dd');
-    dt.textContent = label;
-    dd.textContent = value;
-    list.append(dt, dd);
+  menuButton.addEventListener('click', () => setMenu(menu.hidden));
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenu(false);
   });
-  steps.forEach(panel => { panel.hidden = true; });
-  navigation.hidden = true;
-  summary.hidden = false;
-  progress.forEach(dot => { dot.removeAttribute('aria-current'); dot.classList.add('complete'); });
-  summary.querySelector('h3').focus();
-}
-
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  error.textContent = '';
-  if (current === 1 && !/^[0-9]{5}$/.test(form.elements.zip.value)) {
-    error.textContent = 'Please enter a 5-digit ZIP code.';
-    form.elements.zip.focus();
-    return;
-  }
-  if (current === 4 && !form.elements.phone.value.trim()) {
-    error.textContent = 'Please enter your phone number so Andre can call you.';
-    form.elements.phone.focus();
-    return;
-  }
-  if (current < 4) showStep(current + 1);
-  else review();
-});
-back.addEventListener('click', () => showStep(Math.max(0, current - 1)));
-document.querySelector('#edit').addEventListener('click', () => showStep(0));
-document.querySelector('#submit-estimate').addEventListener('click', () => {
-  summary.hidden = true;
-  sent.hidden = false;
-  sent.tabIndex = -1;
-  sent.focus();
-});
-document.querySelectorAll('[data-job]').forEach(link => {
-  link.addEventListener('click', () => {
-    const choice = [...form.elements.job].find(input => input.value === link.dataset.job);
-    if (choice) choice.checked = true;
-    showStep(0, false);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !menu.hidden) {
+      setMenu(false);
+      menuButton.focus();
+    }
   });
-});
-document.querySelectorAll('.menu nav a').forEach(link => {
-  link.addEventListener('click', () => { document.querySelector('.menu').open = false; });
-});
-showStep(0, false);
+
+  const form = document.querySelector('#estimate-form');
+  const steps = [...form.querySelectorAll('fieldset')];
+  const progress = document.querySelector('#step-progress');
+  const status = document.querySelector('#step-status');
+  const review = document.querySelector('#request-review');
+  const navigation = document.querySelector('#form-navigation');
+  const back = document.querySelector('#back');
+  const nextLabel = document.querySelector('#next span');
+  const stairsField = document.querySelector('#stairs-field');
+  const preview = document.querySelector('#message-preview');
+  let currentStep = 0;
+
+  function data() {
+    const values = new FormData(form);
+    return {
+      job: values.get('job') || '',
+      zip: (values.get('zip') || '').trim(),
+      rooms: values.getAll('rooms'),
+      size: values.get('size') || '',
+      stairs: stairsField.hidden ? '' : values.get('stairs') || '',
+      photo: values.get('photo') === 'yes',
+      name: (values.get('name') || '').trim(),
+      phone: (values.get('phone') || '').trim(),
+      notes: (values.get('notes') || '').trim()
+    };
+  }
+
+  function updateStairs() {
+    stairsField.hidden = !(data().job === 'Fix up my stairs' || data().rooms.includes('Stairs'));
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('.field-error').forEach((error) => { error.textContent = ''; });
+    form.querySelectorAll('[aria-invalid]').forEach((input) => input.removeAttribute('aria-invalid'));
+  }
+
+  function showStep(step, moveFocus = true) {
+    currentStep = step;
+    clearErrors();
+    steps.forEach((fieldset, index) => { fieldset.hidden = index !== step; });
+    const isReview = step === steps.length;
+    review.hidden = !isReview;
+    navigation.hidden = isReview;
+    back.hidden = step === 0;
+    progress.value = Math.min(step + 1, 5);
+    status.textContent = isReview ? 'All 5 steps complete. Review your request.' : `Step ${step + 1} of 5`;
+    nextLabel.textContent = step === 4 ? 'Review my request' : 'Next';
+    updateStairs();
+    if (isReview) preview.textContent = PFEstimate.buildMessage(data());
+    if (moveFocus) {
+      (isReview ? document.querySelector('#review-title') : steps[step].querySelector('legend')).focus({preventScroll:true});
+      document.querySelector('.wizard').scrollIntoView({block:'start'});
+    }
+  }
+
+  function validateStep() {
+    clearErrors();
+    const values = data();
+    let firstInvalid;
+    function error(id, message, input) {
+      document.getElementById(id).textContent = message;
+      input.setAttribute('aria-invalid', 'true');
+      if (!firstInvalid) firstInvalid = input;
+    }
+    if (currentStep === 0 && !values.job) {
+      error('job-error', 'Choose the work you need help with.', form.querySelector('[name="job"]'));
+    }
+    if (currentStep === 1 && !/^\d{5}$/.test(values.zip)) {
+      error('zip-error', 'Enter a 5-digit ZIP code.', form.elements.zip);
+    }
+    if (currentStep === 2) {
+      ['size', 'stairs'].forEach((name) => {
+        if (name === 'stairs' && stairsField.hidden) return;
+        const input = form.elements[name];
+        if (input.validity.badInput || (input.value && (!Number.isInteger(Number(input.value)) || Number(input.value) < 1))) {
+          error(`${name}-error`, 'Enter a whole number greater than zero, or leave this blank.', input);
+        }
+      });
+    }
+    if (currentStep === 4) {
+      if (!values.name) error('name-error', 'Enter your name.', form.elements.name);
+      if (values.phone.replace(/\D/g, '').length !== 10) {
+        error('phone-error', 'Enter a 10-digit phone number.', form.elements.phone);
+      }
+    }
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return false;
+    }
+    return true;
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (currentStep < steps.length && validateStep()) showStep(currentStep + 1);
+  });
+  back.addEventListener('click', () => showStep(currentStep - 1));
+  form.addEventListener('change', updateStairs);
+  document.querySelector('#change-answers').addEventListener('click', () => showStep(0));
+  document.querySelectorAll('[data-job]').forEach((link) => {
+    link.addEventListener('click', () => {
+      [...form.querySelectorAll('[name="job"]')].forEach((radio) => { radio.checked = radio.value === link.dataset.job; });
+      showStep(0, false);
+      // The anchor performs the scroll; focus the first selected answer without overriding it.
+      form.querySelector('[name="job"]:checked').focus({preventScroll:true});
+    });
+  });
+  document.querySelector('#send-request').addEventListener('click', () => {
+    PFEstimate.send(data());
+  });
+  document.querySelector('#copy-message').addEventListener('click', async () => {
+    const copyStatus = document.querySelector('#copy-status');
+    try {
+      await navigator.clipboard.writeText(PFEstimate.buildMessage(data()));
+      copyStatus.textContent = 'Message copied. Paste it into a text to Andre.';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(preview);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      preview.focus();
+      copyStatus.textContent = 'Select and copy the message above, then paste it into a text to Andre.';
+    }
+  });
+  showStep(0, false);
+})();

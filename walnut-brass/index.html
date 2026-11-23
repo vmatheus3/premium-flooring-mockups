@@ -1,49 +1,621 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#22160F"><meta name="description" content="Hardwood refinishing and installation across Denver metro. Tell Andre about your floors and book a free estimate.">
+<meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1E140E">
+<meta name="description" content="Hardwood floor refinishing, stairs and installation across Denver metro. Talk with Andre at Premium Flooring about a free estimate.">
 <title>Premium Flooring · Walnut &amp; Brass</title>
-<link rel="stylesheet" href="style.css"><script src="script.js" defer></script>
+<link rel="preload" href="../shared/fonts/instrumentserif-normal-400.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="../shared/estimate-sms.js" defer>
+</script>
+<script src="script.js" defer>
+</script>
 </head>
 <body>
-<a class="all-options" href="../index.html">← All options</a><a class="skip" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<a class="all-options" href="../index.html">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#arrow-left"/>
+</svg>All options</a>
 <header class="site-header">
-<div class="header-main wrap"><a class="brand" href="#" aria-label="Premium Flooring home"><img src="../shared/img/logo-white.png" alt="Premium Flooring" width="240" height="85"><span>Hardwood refinishing &amp; installation · Denver metro</span></a><a class="header-phone" href="tel:+13033495952">(303) 349-5952</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navigation"><span></span><span></span></button></div>
-<nav id="navigation" class="wrap" aria-label="Main navigation"><a href="#services">Our services</a><a href="#projects">Our work</a><a href="#process">Our process</a><a href="#reviews">Reviews</a><a class="button" href="#estimate">Free estimate</a></nav>
+<div class="header-inner wrap">
+<a class="brand" href="#main" aria-label="Premium Flooring home">
+<img src="../shared/img/logo-white.png" width="680" height="227" alt="Premium Flooring">
+</a>
+<nav class="desktop-nav" aria-label="Main navigation">
+<a href="#services">Services</a>
+<a href="#work">Our work</a>
+<a href="#reviews">Reviews</a>
+</nav>
+<a class="header-phone" href="tel:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#phone"/>
+</svg>(303) 349-5952</a>
+<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#menu"/>
+</svg>
+<span>Menu</span>
+</button>
+</div>
+<nav id="menu-panel" class="menu-panel" aria-label="More navigation" hidden>
+<div class="wrap">
+<a href="#services">What can we help with?</a>
+<a href="#estimate">Get a free estimate</a>
+<a href="#work">Recent work</a>
+<a href="#andre">Meet Andre</a>
+<a href="#reviews">Homeowner reviews</a>
+<a href="#faq">Common questions</a>
+</div>
+</nav>
 </header>
 <main id="main">
-<section class="hero" aria-labelledby="hero-title"><img class="hero-photo" src="../shared/img/stone-fireplace.webp" alt="Sunlight across refinished hardwood floors in a log home with a stone fireplace" fetchpriority="high"><div class="hero-content wrap"><p class="eyebrow">Beautiful wood. A fresh beginning.</p><h1 id="hero-title">Keep the wood.<br>Renew the finish.</h1><div class="short-rule"></div><p>We sand and refinish hardwood floors across Denver metro, with nearly ten years of local experience.</p><a class="button" href="tel:+13033495952">Call (303) 349-5952</a><a class="hero-link" href="#estimate">Or book a free estimate <span aria-hidden="true">→</span></a></div></section>
-<section id="services" class="section wrap"><p class="section-label">Our services</p><h2>What do you need?</h2><div class="services grid-three">
-<a href="#estimate" class="service" data-job="Refinish floors"><img src="../shared/img/window-wall.webp" alt="Freshly refinished hardwood in a bright great room"><span class="card-label">01 / Refinish</span><h3>Refinish my floors</h3><p>Bring the beauty back to the wood you already love.</p><span class="text-link">Tell us about your floors →</span></a>
-<a href="#estimate" class="service" data-job="Stairs"><img src="../shared/img/walnut-stair.webp" alt="Rich walnut-colored wood stair treads"><span class="card-label">02 / Stairs</span><h3>Fix up my stairs</h3><p>Refinish existing stairs or give them new wood treads.</p><span class="text-link">Tell us about your stairs →</span></a>
-<a href="#estimate" class="service" data-job="Install"><img src="../shared/img/oak-kitchen.webp" alt="Golden wood floors flowing into a kitchen"><span class="card-label">03 / Installation</span><h3>Install new floors</h3><p>Hardwood, engineered, laminate &amp; vinyl, fitted to your home.</p><span class="text-link">Tell us what you have in mind →</span></a>
-</div><div class="center-cta"><a class="button" href="#estimate">Book a free estimate</a></div></section>
-<section class="estimate-section" id="estimate"><div class="wrap estimate-layout"><div class="estimate-intro"><p class="section-label">Let’s start with your home</p><h2>Get a fast,<br>custom estimate</h2><p>A few details about your floors. A conversation with Andre. A plan made for your home.</p><p class="small-note">Free estimates · Denver metro</p></div><div class="wizard">
-<noscript><p>Please enable JavaScript to use the estimate form, or call <a href="tel:+13033495952">(303) 349-5952</a>.</p></noscript>
+<section class="hero" aria-labelledby="hero-title">
+<img src="../shared/img/stone-fireplace.webp" width="1275" height="1700" alt="Refinished floor beside a stone fireplace and timber staircase" fetchpriority="high">
+<div class="hero-content wrap">
+<h1 id="hero-title">Keep the wood.<br>Renew the finish.</h1>
+<span class="hero-rule" aria-hidden="true">
+</span>
+<p>We sand and refinish hardwood floors across Denver metro, with nearly ten years of local experience.</p>
+<div class="button-row">
+<a class="button primary" href="tel:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#phone"/>
+</svg>Call (303) 349-5952</a>
+<a class="button secondary" href="#estimate">Get a free estimate</a>
+</div>
+</div>
+</section>
+<div class="trust-line wrap">
+<span>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#shield-check"/>
+</svg>Licensed &amp; fully insured</span>
+<span>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#file-text"/>
+</svg>Free estimates</span>
+<span>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#map-pin"/>
+</svg>Denver metro</span>
+</div>
+<section class="section wrap" id="services" aria-labelledby="services-title">
+<h2 id="services-title" class="center">What can we help with?</h2>
+<div class="split services-split">
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/window-wall.webp" width="1600" height="1200" alt="Sunlit great room with refinished hardwood floors" loading="lazy">
+</div>
+<figcaption>Great room: sanded and refinished</figcaption>
+</figure>
+<div class="service-list">
+<a class="service-item" href="#estimate" data-job="Refinish my floors">
+<h3>Refinish my floors</h3>
+<p>Sand away the worn finish and bring back the wood.</p>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#arrow-right"/>
+</svg>
+</a>
+<a class="service-item" href="#estimate" data-job="Fix up my stairs">
+<h3>Fix up my stairs</h3>
+<p>Refinish existing treads or fit new ones.</p>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#arrow-right"/>
+</svg>
+</a>
+<a class="service-item" href="#estimate" data-job="Install new floors">
+<h3>Install new floors</h3>
+<p>Solid and engineered hardwood, laminate and vinyl.</p>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#arrow-right"/>
+</svg>
+</a>
+<div class="section-cta">
+<a class="button primary" href="#estimate">Book a free estimate</a>
+</div>
+</div>
+</div>
+</section>
+<section class="estimate-section section" id="estimate" aria-labelledby="estimate-title">
+<div class="wrap estimate-layout">
+<div class="estimate-intro">
+<h2 id="estimate-title">Get a fast,<br>custom estimate</h2>
+<p>Tell Andre a little about your floors. Review your request, then open it in your text messages.</p>
+<p>Prefer to talk it through?</p>
+<a class="text-link" href="tel:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#phone"/>
+</svg>(303) 349-5952</a>
+</div>
+<div class="wizard">
+<noscript>
+<p>Please enable JavaScript to use the estimate form, or call <a href="tel:+13033495952">(303) 349-5952</a>.</p>
+</noscript>
 <form id="estimate-form" novalidate>
-<div class="progress" aria-label="Estimate progress"><span class="active" aria-current="step">1</span><i></i><span>2</span><i></i><span>3</span><i></i><span>4</span><i></i><span>5</span></div><p class="step-caption" id="step-caption">Step 1 of 5 · Your project</p>
-<fieldset data-step="0"><legend>What can we help with?</legend><div class="choices job-choices"><label><input type="radio" name="job" value="Refinish floors" required><span>Refinish floors</span></label><label><input type="radio" name="job" value="Stairs"><span>Stairs</span></label><label><input type="radio" name="job" value="Install"><span>Install</span></label><label><input type="radio" name="job" value="Repairs"><span>Repairs</span></label></div></fieldset>
-<fieldset data-step="1" hidden><legend>Where is your project?</legend><label class="field-label" for="zip">ZIP code</label><input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" required placeholder="5-digit ZIP code"></fieldset>
-<fieldset data-step="2" hidden><legend>A little about the space</legend><p>Select any rooms that apply.</p><div class="choices room-choices"><label><input type="checkbox" name="rooms" value="Living room"><span>Living room</span></label><label><input type="checkbox" name="rooms" value="Dining room"><span>Dining room</span></label><label><input type="checkbox" name="rooms" value="Kitchen"><span>Kitchen</span></label><label><input type="checkbox" name="rooms" value="Bedrooms"><span>Bedrooms</span></label><label><input type="checkbox" name="rooms" value="Hallway"><span>Hallway</span></label><label><input type="checkbox" name="rooms" value="Stairs"><span>Stairs</span></label></div><label class="field-label" for="size">Approximate size (optional)</label><input id="size" name="size" type="text" placeholder="e.g. 600 sq ft, or not sure"></fieldset>
-<fieldset data-step="3" hidden><legend>Show us your floors</legend><p>A photo helps, but it's optional.</p><label class="upload" for="photo"><span aria-hidden="true">＋</span> Choose a project photo<input id="photo" name="photo" type="file" accept="image/*"></label><p class="small-note">Your photo stays on this device in this mockup.</p></fieldset>
-<fieldset data-step="4" hidden><legend>Who should Andre call?</legend><label class="field-label" for="name">Your name</label><input id="name" name="name" autocomplete="name" type="text"><label class="field-label" for="phone">Phone number (required)</label><input id="phone" name="phone" autocomplete="tel" type="tel" required placeholder="(303) 555-0123"></fieldset>
-<p id="form-error" role="alert" hidden></p><div class="form-controls"><button id="back" type="button" class="button secondary" hidden>Back</button><button id="next" type="button" class="button">Next <span aria-hidden="true">→</span></button></div>
-<div id="summary" hidden><h3 tabindex="-1" id="summary-title">Here is what you told us</h3><dl id="summary-details"></dl><div class="form-controls"><button class="button secondary" type="button" id="edit">Edit</button><button class="button" type="submit">Request my estimate</button></div><p class="small-note">This is a mockup. Nothing will be sent.</p></div>
-<div id="confirmation" role="status" hidden><span class="confirmation-mark" aria-hidden="true">✓</span><h3>Thanks for sharing.</h3><p>Mockup only — nothing was sent. In the real site Andre would call you back.</p><a class="text-link" href="tel:+13033495952">Call Andre: (303) 349-5952</a></div>
-</form></div></div></section>
-<section class="section wrap" id="projects"><p class="section-label">Our work</p><h2>Real jobs, real homes</h2><p class="section-intro">The grain, the details, the difference a fresh finish makes.</p><div class="grid-three projects"><article><img src="../shared/img/window-wall.webp" alt="Refinished great room floors beneath tall windows" loading="lazy"><h3>Great room · sanded and refinished</h3><a class="text-link" href="#">See this project →</a></article><article><img src="../shared/img/curved-steps.webp" alt="Wood treads following a curved staircase" loading="lazy"><h3>Curved staircase · wood treads</h3><a class="text-link" href="#">See this project →</a></article><article><img src="../shared/img/sanding.webp" alt="Hardwood floor being sanded to remove its old finish" loading="lazy"><h3>During: sanding the old finish</h3><a class="text-link" href="#">See this project →</a></article></div>
-<div class="before-after"><figure><img src="../shared/img/sanding.webp" alt="During the work: sanding away an old hardwood finish" loading="lazy"><figcaption>During <span>Preparing the wood</span></figcaption></figure><div class="pair-arrow" aria-hidden="true">→</div><figure><img src="../shared/img/stone-fireplace.webp" alt="After refinishing: glossy wood flooring beside a stone fireplace" loading="lazy"><figcaption>After <span>The grain comes to life</span></figcaption></figure></div>
-<p class="strip-label">More from our projects <span aria-hidden="true">↔</span></p><div class="photo-strip" tabindex="0" role="region" aria-label="More project photographs, scroll horizontally"><img src="../shared/img/fan-stair.webp" alt="Fan-shaped wood stair treads" loading="lazy"><img src="../shared/img/light-filled-room.webp" alt="Wood flooring in a light-filled room" loading="lazy"><img src="../shared/img/fitting-boards.webp" alt="Fitting hardwood boards during installation" loading="lazy"><img src="../shared/img/pale-stair.webp" alt="Pale wood staircase" loading="lazy"><img src="../shared/img/sunlit-boards.webp" alt="Natural sunlight across wood floorboards" loading="lazy"><img src="../shared/img/rail-detail.webp" alt="Stair rail and wood detail" loading="lazy"><img src="../shared/img/fitted-room.webp" alt="Completed wood floor in a home" loading="lazy"></div><div class="center-cta"><a class="button" href="#estimate">Book a free estimate</a></div></section>
-<section class="section tones wrap"><p class="section-label">A finish that feels like home</p><h2>Find your tone</h2><p class="section-intro">Start with a shade you love. Then compare samples on your actual boards.</p><div class="stain-grid"><figure><img src="../shared/img/stain-1.webp" alt="Natural wood stain sample" loading="lazy"><figcaption>Natural</figcaption></figure><figure><img src="../shared/img/stain-2.webp" alt="Golden Oak stain sample" loading="lazy"><figcaption>Golden Oak</figcaption></figure><figure><img src="../shared/img/stain-3.webp" alt="Provincial stain sample" loading="lazy"><figcaption>Provincial</figcaption></figure><figure><img src="../shared/img/stain-4.webp" alt="Special Walnut stain sample" loading="lazy"><figcaption>Special Walnut</figcaption></figure><figure><img src="../shared/img/stain-5.webp" alt="Ebony stain sample" loading="lazy"><figcaption>Ebony</figcaption></figure></div></section>
-<section class="section wrap price"><p class="section-label">Every floor has its own story</p><h2>What affects your price</h2><ul class="checklist"><li>Size of the area</li><li>Wood type and condition</li><li>Stain color or natural</li><li>Number of stairs</li><li>Repairs needed</li><li>Furniture moving</li></ul><p>We give you a written estimate after we see your floors.</p></section>
-<section class="section wrap next-section"><p class="section-label">From first call to a clear plan</p><h2>What happens next</h2><ol class="steps grid-three"><li><span>1</span><h3>Andre calls you back</h3></li><li><span>2</span><h3>We visit and look at your floors</h3></li><li><span>3</span><h3>You get a written estimate</h3></li></ol></section>
-<section class="section wrap meet"><div class="monogram" aria-hidden="true">A</div><div><p class="section-label">Personal from the start</p><h2>Meet Andre</h2><p>Andre owns Premium Flooring and is the person you talk to from estimate to final coat.</p><a class="text-link" href="tel:+13033495952">Say hello · (303) 349-5952 →</a></div></section>
-<section class="section wrap" id="process"><p class="section-label ruled">Our process</p><h2>Care in every coat.</h2><ol class="process grid-three"><li><span class="number">01</span><h3>Assess &amp; sand</h3><p>We look at your floors and sand away the worn finish.</p></li><li><span class="number">02</span><h3>Sample the stain</h3><p>Compare tones on your actual boards.</p></li><li><span class="number">03</span><h3>Protect the grain</h3><p>Choose the finish and sheen.</p></li></ol></section>
-<section class="section wrap" id="reviews"><p class="section-label ruled">Google reviews</p><h2>Good work. Happy homes.</h2><div class="grid-three reviews"><figure><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Thank you so much to Andre and his guys for making my floors look new again.”</blockquote><figcaption>Billy <span>Aug 15, 2025</span></figcaption></figure><figure><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“The team was respectful of my home, kept the workspace clean, and finished the job on time.”</blockquote><figcaption>Ytalo Cardoso <span>Sep 1, 2025</span></figcaption></figure><figure><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Andre and his team made this experience a joy from start to finish.”</blockquote><figcaption>Jay B <span>Aug 26, 2025</span></figcaption></figure></div><a href="#" class="text-link more-reviews">More reviews on Google →</a><div class="center-cta"><a class="button" href="#estimate">Book a free estimate</a></div></section>
-<section class="section wrap faq"><p class="section-label">A few things you may be wondering</p><h2>Questions, answered.</h2><details><summary>Can my floor be refinished?</summary><p>Usually, if the boards are solid wood or thick enough engineered wood; Andre checks the wear and past sanding at the visit.</p></details><details><summary>Refinish or replace?</summary><p>If the boards are sound, refinishing is usually the simpler option; we'll tell you honestly at the visit.</p></details><details><summary>How long does it take?</summary><p>It depends on the size, stain and finish; you'll get a timeline with your written estimate.</p></details><details><summary>Will there be dust?</summary><p>Sanding makes dust; we'll explain how we contain it and clean up.</p></details><details><summary>When can furniture go back?</summary><p>It depends on the finish; Andre will tell you walking, furniture and rug timing.</p></details></section>
-<section class="final-cta"><div class="wrap"><p class="section-label">Let’s talk about your floors</p><h2>What's underfoot?</h2><p>Tell Andre about the rooms, the stairs and the wood you want to keep.</p><div class="final-buttons"><a class="button secondary" href="tel:+13033495952">Call (303) 349-5952</a><a class="button" href="#estimate">Schedule my free estimate</a></div><a class="email" href="mailto:andre@thepremiumflooring.com">andre@thepremiumflooring.com</a><p class="trust">Licensed &amp; fully insured <span aria-hidden="true">·</span> Free estimates</p></div></section>
+<div class="progress-copy" id="step-status" aria-live="polite" aria-atomic="true">Step 1 of 5</div>
+<div class="progress-track" aria-hidden="true">
+<span id="progress-fill">
+</span>
+</div>
+<section class="form-step" data-step="0" aria-labelledby="job-title">
+<h3 id="job-title" tabindex="-1">What do you need?</h3>
+<fieldset aria-describedby="job-error">
+<legend class="sr-only">Choose a job</legend>
+<label class="choice">
+<input type="radio" name="job" value="Refinish my floors">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#brush"/>
+</svg>
+<span>Refinish my floors</span>
+</label>
+<label class="choice">
+<input type="radio" name="job" value="Fix up my stairs">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#stairs"/>
+</svg>
+<span>Fix up my stairs</span>
+</label>
+<label class="choice">
+<input type="radio" name="job" value="Install new floors">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#layers"/>
+</svg>
+<span>Install new floors</span>
+</label>
+<label class="choice">
+<input type="radio" name="job" value="Repairs">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#hammer"/>
+</svg>
+<span>Repairs</span>
+</label>
+</fieldset>
+<p class="error" id="job-error" aria-live="polite" hidden>
+</p>
+</section>
+<section class="form-step" data-step="1" aria-labelledby="zip-title" hidden>
+<h3 id="zip-title" tabindex="-1">Where is the home?</h3>
+<label class="field-label" for="zip">ZIP code</label>
+<input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" required aria-describedby="zip-error">
+<p class="error" id="zip-error" aria-live="polite" hidden>
+</p>
+</section>
+<section class="form-step" data-step="2" aria-labelledby="rooms-title" hidden>
+<h3 id="rooms-title" tabindex="-1">Which rooms, and about how big?</h3>
+<fieldset>
+<legend>Select any rooms that apply.</legend>
+<div class="room-chips">
+<label>
+<input type="checkbox" name="rooms" value="Living room">
+<span>Living room</span>
+</label>
+<label>
+<input type="checkbox" name="rooms" value="Dining room">
+<span>Dining room</span>
+</label>
+<label>
+<input type="checkbox" name="rooms" value="Kitchen">
+<span>Kitchen</span>
+</label>
+<label>
+<input type="checkbox" name="rooms" value="Bedrooms">
+<span>Bedrooms</span>
+</label>
+<label>
+<input type="checkbox" name="rooms" value="Hallway">
+<span>Hallway</span>
+</label>
+<label>
+<input type="checkbox" name="rooms" value="Stairs">
+<span>Stairs</span>
+</label>
+</div>
+</fieldset>
+<label class="field-label" for="size">Approximate size (sq ft) <span class="optional">Optional</span>
+</label>
+<input id="size" name="size" type="number" min="0" step="1" inputmode="numeric" aria-describedby="size-error">
+<p class="error" id="size-error" aria-live="polite" hidden>
+</p>
+<div id="stairs-field" hidden>
+<label class="field-label" for="stairs">Number of stairs <span class="optional">Optional</span>
+</label>
+<input id="stairs" name="stairs" type="number" min="0" step="1" inputmode="numeric" aria-describedby="stairs-error">
+<p class="error" id="stairs-error" aria-live="polite" hidden>
+</p>
+</div>
+</section>
+<section class="form-step" data-step="3" aria-labelledby="photo-title" hidden>
+<h3 id="photo-title" tabindex="-1">Photos help Andre quote faster.</h3>
+<p>You can add photos in the text message on the last step.</p>
+<fieldset>
+<legend class="sr-only">Will you attach photos?</legend>
+<label class="choice">
+<input type="radio" name="photo" value="yes">
+<span>Yes, I'll attach photos to the text</span>
+</label>
+<label class="choice">
+<input type="radio" name="photo" value="no" checked>
+<span>No photos right now</span>
+</label>
+</fieldset>
+</section>
+<section class="form-step" data-step="4" aria-labelledby="contact-title" hidden>
+<h3 id="contact-title" tabindex="-1">How can Andre reach you?</h3>
+<label class="field-label" for="name">Name</label>
+<input id="name" name="name" autocomplete="name" required aria-describedby="name-error">
+<p class="error" id="name-error" aria-live="polite" hidden>
+</p>
+<label class="field-label" for="phone">Phone</label>
+<input id="phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="phone-error">
+<p class="error" id="phone-error" aria-live="polite" hidden>
+</p>
+<label class="field-label" for="notes">Notes <span class="optional">Optional</span>
+</label>
+<textarea id="notes" name="notes" rows="3">
+</textarea>
+</section>
+<div class="wizard-nav" id="wizard-nav">
+<button class="button secondary" type="button" id="back" hidden>Back</button>
+<button class="button primary" type="submit" id="next">Next<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#arrow-right"/>
+</svg>
+</button>
+</div>
+<section id="review" aria-labelledby="review-title" hidden>
+<h3 id="review-title" tabindex="-1">Check your request</h3>
+<pre id="message-preview">
+</pre>
+<button type="button" class="text-link" id="edit">Change answers</button>
+<button type="button" class="button primary" id="send">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#message"/>
+</svg>Text my request to Andre</button>
+<p class="handoff-note">This opens your phone's text messages with everything filled in. Just press send.</p>
+<a class="text-link" href="tel:+13033495952">Prefer to call? (303) 349-5952</a>
+<div class="copy-fallback">
+<button type="button" class="button secondary" id="copy">Copy message</button>
+<p>Text it to <a href="sms:+13033495952">(303) 349-5952</a>.</p>
+<p id="copy-status" aria-live="polite">
+</p>
+</div>
+</section>
+</form>
+</div>
+</div>
+</section>
+<section class="section wrap" id="work" aria-labelledby="work-title">
+<h2 class="center" id="work-title">Recent work in<br>Denver-area homes</h2>
+<div class="project-grid">
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/window-wall.webp" width="1600" height="1200" alt="Finished hardwood floor beneath tall great-room windows" loading="lazy">
+</div>
+<figcaption>Great room: sanded and refinished</figcaption>
+</figure>
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/curved-steps.webp" width="1600" height="1200" alt="Curved staircase fitted with wood treads" loading="lazy">
+</div>
+<figcaption>Curved staircase: wood treads</figcaption>
+</figure>
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/oak-kitchen.webp" width="900" height="1600" alt="Refinished wood floor in a kitchen" loading="lazy">
+</div>
+<figcaption>Kitchen: refinished floor</figcaption>
+</figure>
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/walnut-stair.webp" width="1275" height="1700" alt="Wood staircase with dark stain and white walls" loading="lazy">
+</div>
+<figcaption>Stairs: dark stain</figcaption>
+</figure>
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/sanding.webp" width="1425" height="1900" alt="Floor sanding in progress to remove the old finish" loading="lazy">
+</div>
+<figcaption>During: sanding the old finish</figcaption>
+</figure>
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/stain-library.webp" width="1600" height="1200" alt="Different stain colors sampled on wood boards" loading="lazy">
+</div>
+<figcaption>Stain samples on the actual boards</figcaption>
+</figure>
+</div>
+<div class="comparison">
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/sanding.webp" width="1425" height="1900" alt="Wood floor during sanding, before the new finish" loading="lazy">
+</div>
+<figcaption>During</figcaption>
+</figure>
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/stone-fireplace.webp" width="1275" height="1700" alt="Finished wood floor beside the stone fireplace" loading="lazy">
+</div>
+<figcaption>After</figcaption>
+</figure>
+</div>
+<div class="photo-strip" role="region" aria-label="More flooring and staircase photos, scroll horizontally" tabindex="0">
+<img src="../shared/img/fan-stair.webp" width="1600" height="1200" alt="Fan-shaped wood staircase treads" loading="lazy">
+<img src="../shared/img/pale-stair.webp" width="1275" height="1700" alt="Light-toned wood staircase" loading="lazy">
+<img src="../shared/img/fitted-room.webp" width="823" height="617" alt="Room with newly fitted wood flooring" loading="lazy">
+<img src="../shared/img/board-layout.webp" width="1700" height="1275" alt="Wood boards laid out during floor installation" loading="lazy">
+<img src="../shared/img/rail-detail.webp" width="1425" height="1900" alt="Close view of wood stair railing details" loading="lazy">
+<img src="../shared/img/installation-team.webp" width="1700" height="1275" alt="Floor installation work in progress" loading="lazy">
+</div>
+<div class="section-cta">
+<a class="button primary" href="#estimate">Book a free estimate</a>
+</div>
+</section>
+<section class="section wrap tones" aria-labelledby="tones-title">
+<h2 class="center" id="tones-title">Find your tone</h2>
+<p class="center measure">Compare tones on your actual boards.</p>
+<div class="tone-strip">
+<figure>
+<img src="../shared/img/stain-1.webp" width="215" height="350" alt="Natural stain sample" loading="lazy">
+<figcaption>Natural</figcaption>
+</figure>
+<figure>
+<img src="../shared/img/stain-2.webp" width="215" height="350" alt="Golden Oak stain sample" loading="lazy">
+<figcaption>Golden Oak</figcaption>
+</figure>
+<figure>
+<img src="../shared/img/stain-3.webp" width="215" height="350" alt="Provincial stain sample" loading="lazy">
+<figcaption>Provincial</figcaption>
+</figure>
+<figure>
+<img src="../shared/img/stain-4.webp" width="215" height="350" alt="Special Walnut stain sample" loading="lazy">
+<figcaption>Special Walnut</figcaption>
+</figure>
+<figure>
+<img src="../shared/img/stain-5.webp" width="215" height="350" alt="Ebony stain sample" loading="lazy">
+<figcaption>Ebony</figcaption>
+</figure>
+</div>
+</section>
+<section class="section wrap split price" aria-labelledby="price-title">
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/sunlit-boards.webp" width="736" height="920" alt="Sunlight revealing the grain in a hardwood floor" loading="lazy">
+</div>
+<figcaption>Hardwood floor in natural light</figcaption>
+</figure>
+<div>
+<h2 id="price-title">What affects the price</h2>
+<ul class="divided-list price-list">
+<li>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#check"/>
+</svg>Size of the area</li>
+<li>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#check"/>
+</svg>Type and condition of the wood</li>
+<li>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#check"/>
+</svg>Stain color or natural finish</li>
+<li>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#check"/>
+</svg>Number of stairs</li>
+<li>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#check"/>
+</svg>Repairs needed</li>
+<li>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#check"/>
+</svg>Moving furniture</li>
+</ul>
+<p>Andre gives you a written estimate after he sees your floors.</p>
+</div>
+</section>
+<section class="section wrap next-section" aria-labelledby="next-title">
+<h2 class="center" id="next-title">What happens after you reach out</h2>
+<ol class="numbered-list">
+<li>Andre calls or texts you back.</li>
+<li>He visits and looks at your floors.</li>
+<li>You get a written estimate.</li>
+</ol>
+</section>
+<section class="section wrap andre-section" id="andre" aria-labelledby="andre-title">
+<div class="monogram" aria-hidden="true">A</div>
+<h2 id="andre-title">You'll work with Andre</h2>
+<p class="measure">Andre owns Premium Flooring. He's the person you talk to from the first visit to the final coat.</p>
+<a class="text-link" href="tel:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#phone"/>
+</svg>Talk with Andre</a>
+</section>
+<section class="section wrap process-section" aria-labelledby="process-title">
+<h2 class="center" id="process-title">How a refinish works</h2>
+<div class="split">
+<figure>
+<div class="photo-frame">
+<img src="../shared/img/light-filled-room.webp" width="1275" height="1700" alt="Refinished hardwood floor in a light-filled room" loading="lazy">
+</div>
+<figcaption>Refinished hardwood floor</figcaption>
+</figure>
+<ol class="process-list">
+<li>
+<h3>Assess and sand</h3>
+<p>We look at your floors and sand away the worn finish.</p>
+</li>
+<li>
+<h3>Sample the stain on your actual boards</h3>
+</li>
+<li>
+<h3>Protect the grain with the finish and sheen you choose</h3>
+</li>
+</ol>
+</div>
+</section>
+<section class="section wrap reviews" id="reviews" aria-labelledby="reviews-title">
+<h2 class="center" id="reviews-title">What homeowners say</h2>
+<div class="review-list">
+<figure>
+<div class="stars" role="img" aria-label="5 out of 5 stars">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+</div>
+<blockquote>“Thank you so much to Andre and his guys for making my floors look new again.”</blockquote>
+<figcaption>Billy <span>Aug 15, 2025</span>
+</figcaption>
+</figure>
+<figure>
+<div class="stars" role="img" aria-label="5 out of 5 stars">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+</div>
+<blockquote>“The team was respectful of my home, kept the workspace clean, and finished the job on time.”</blockquote>
+<figcaption>Ytalo Cardoso <span>Sep 1, 2025</span>
+</figcaption>
+</figure>
+<figure>
+<div class="stars" role="img" aria-label="5 out of 5 stars">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#star"/>
+</svg>
+</div>
+<blockquote>“Andre and his team made this experience a joy from start to finish.”</blockquote>
+<figcaption>Jay B <span>Aug 26, 2025</span>
+</figcaption>
+</figure>
+</div>
+<div class="google-link">
+<a class="text-link" href="#">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#google"/>
+</svg>Read more on Google</a>
+</div>
+<div class="section-cta">
+<a class="button primary" href="#estimate">Book a free estimate</a>
+</div>
+</section>
+<section class="section wrap faq" id="faq" aria-labelledby="faq-title">
+<h2 class="center" id="faq-title">Common questions</h2>
+<div class="faq-list">
+<details>
+<summary>Can my floor be refinished?<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#chevron-down"/>
+</svg>
+</summary>
+<p>Usually, if the boards are solid wood or thick enough engineered wood; Andre checks the wear and past sanding at the visit.</p>
+</details>
+<details>
+<summary>Refinish or replace?<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#chevron-down"/>
+</svg>
+</summary>
+<p>If the boards are sound, refinishing is usually the simpler option; we'll tell you honestly at the visit.</p>
+</details>
+<details>
+<summary>How long does it take?<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#chevron-down"/>
+</svg>
+</summary>
+<p>It depends on the size, stain and finish; you'll get a timeline with your written estimate.</p>
+</details>
+<details>
+<summary>Will there be dust?<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#chevron-down"/>
+</svg>
+</summary>
+<p>Sanding makes dust; we'll explain how we contain it and clean up.</p>
+</details>
+<details>
+<summary>When can furniture go back?<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#chevron-down"/>
+</svg>
+</summary>
+<p>It depends on the finish; Andre will tell you walking, furniture and rug timing.</p>
+</details>
+</div>
+</section>
+<section class="final-band" aria-labelledby="final-title">
+<div class="wrap">
+<h2 id="final-title">What's underfoot?</h2>
+<p>Tell Andre about the rooms, the stairs and the wood you want to keep.</p>
+<div class="button-row">
+<a class="button primary" href="#estimate">Schedule my free estimate</a>
+<a class="button secondary" href="tel:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#phone"/>
+</svg>Call (303) 349-5952</a>
+</div>
+<a class="final-email" href="mailto:andre@thepremiumflooring.com">andre@thepremiumflooring.com</a>
+<p class="final-trust">Licensed &amp; fully insured <span>·</span> Free estimates</p>
+</div>
+</section>
 </main>
-<footer class="wrap"><img src="../shared/img/logo-white.png" alt="Premium Flooring" width="220" height="78"><p>Hardwood refinishing &amp; installation · Denver metro</p><div class="footer-contact"><a href="tel:+13033495952">(303) 349-5952</a><a href="mailto:andre@thepremiumflooring.com">andre@thepremiumflooring.com</a></div><p class="mockup">Mockup — not a live site</p></footer>
-<nav class="bottom-bar" aria-label="Contact Premium Flooring"><a href="tel:+13033495952"><span aria-hidden="true">↗</span> Call</a><a href="sms:+13033495952"><span aria-hidden="true">☏</span> Text</a><a class="book" href="#estimate">Book estimate</a></nav>
-</body></html>
+<footer class="site-footer wrap">
+<a class="footer-brand" href="#main">
+<img src="../shared/img/logo-dark.png" width="680" height="227" alt="Premium Flooring" loading="lazy">
+</a>
+<p>Hardwood refinishing &amp; installation · Denver metro</p>
+<div class="footer-contact">
+<a href="tel:+13033495952">(303) 349-5952</a>
+<a href="mailto:andre@thepremiumflooring.com">andre@thepremiumflooring.com</a>
+</div>
+<p class="mockup-note">Mockup, not a live site</p>
+</footer>
+<nav class="bottom-bar" aria-label="Contact Premium Flooring">
+<a href="tel:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#phone"/>
+</svg>Call</a>
+<a href="sms:+13033495952">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#message"/>
+</svg>Text</a>
+<a href="#estimate" class="bottom-estimate">
+<svg class="icon" aria-hidden="true">
+<use href="../shared/icons.svg#calendar"/>
+</svg>Book estimate</a>
+</nav>
+</body>
+</html>

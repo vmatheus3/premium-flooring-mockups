@@ -1,108 +1,148 @@
-const menuButton = document.querySelector('.menu-toggle');
-const menu = document.querySelector('#menu');
-menuButton.addEventListener('click', () => {
-  const open = menuButton.getAttribute('aria-expanded') !== 'true';
-  menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  menu.hidden = !open;
-});
-menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-  menu.hidden = true;
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Open menu');
-}));
-document.querySelectorAll('.thumb').forEach(button => button.addEventListener('click', () => {
-  const photo = document.querySelector('#hero-photo');
-  photo.src = `../shared/img/${button.dataset.image}.webp`;
-  photo.alt = button.dataset.alt;
-  document.querySelectorAll('.thumb').forEach(thumb => {
-    thumb.classList.toggle('selected', thumb === button);
-    thumb.setAttribute('aria-pressed', String(thumb === button));
-  });
-}));
-const form = document.querySelector('#estimate-form');
-const fields = [...form.querySelectorAll('[data-step]')];
-const progress = [...document.querySelectorAll('.progress li')];
-const back = document.querySelector('#back');
-const next = document.querySelector('#next');
-const summary = document.querySelector('#summary');
-const error = document.querySelector('#form-error');
-const confirmation = document.querySelector('#confirmation');
-let step = 0;
-function render(focus = false) {
-  form.hidden = false;
-  confirmation.hidden = true;
-  fields.forEach((field, i) => { field.hidden = i !== step; });
-  summary.hidden = step !== 5;
-  back.hidden = step === 0 || step === 5;
-  next.textContent = step === 5 ? 'Request my estimate →' : step === 4 ? 'Review my answers →' : 'Next →';
-  progress.forEach((item, i) => {
-    item.classList.toggle('complete', i < step);
-    if (i === Math.min(step, 4)) item.setAttribute('aria-current', 'step');
-    else item.removeAttribute('aria-current');
-  });
-  error.textContent = '';
-  if (step === 5) makeSummary();
-  if (focus) {
-    const target = step === 5 ? summary.querySelector('h3') : fields[step].querySelector('legend');
-    target.setAttribute('tabindex', '-1');
-    target.focus({ preventScroll: true });
+(() => {
+  'use strict';
+  const $ = (selector) => document.querySelector(selector);
+  const menu = $('#site-menu');
+  const menuButton = $('.menu-toggle');
+  function closeMenu() {
+    menu.hidden = true;
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open menu');
+    menuButton.querySelector('use').setAttribute('href', '../shared/icons.svg#menu');
   }
-}
-function validate() {
-  if (step === 1 && !/^\d{5}$/.test(form.elements.zip.value.trim())) {
-    error.textContent = 'Please enter a 5-digit ZIP code.';
-    form.elements.zip.focus();
+  menuButton.addEventListener('click', () => {
+    const opening = menu.hidden;
+    menu.hidden = !opening;
+    menuButton.setAttribute('aria-expanded', String(opening));
+    menuButton.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
+    menuButton.querySelector('use').setAttribute('href', `../shared/icons.svg#${opening ? 'close' : 'menu'}`);
+  });
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !menu.hidden) {
+      closeMenu();
+      menuButton.focus();
+    }
+  });
+
+  const form = $('#estimate-form');
+  const steps = [...form.querySelectorAll('[data-step]')];
+  const review = $('#review-screen');
+  const error = $('#form-error');
+  const bar = $('.progress-track');
+  const stepNames = ['Job', 'ZIP code', 'Rooms & size', 'Photos', 'Contact'];
+  let step = 1;
+  let reviewData;
+
+  function getData() {
+    const values = new FormData(form);
+    return {
+      job: values.get('job') || '',
+      zip: String(values.get('zip') || '').trim(),
+      rooms: values.getAll('rooms'),
+      size: values.get('size') || '',
+      stairs: $('#stairs-field').hidden ? '' : values.get('stairs') || '',
+      photo: values.get('photo') === 'yes',
+      name: String(values.get('name') || '').trim(),
+      phone: String(values.get('phone') || '').trim(),
+      notes: String(values.get('notes') || '').trim()
+    };
+  }
+  function updateStairs() {
+    const values = new FormData(form);
+    $('#stairs-field').hidden = values.get('job') !== 'Fix up my stairs' && !values.getAll('rooms').includes('Stairs');
+  }
+  function clearError() {
+    error.textContent = '';
+    form.querySelectorAll('[aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
+  }
+  function showStep(number, focus = true) {
+    step = number;
+    clearError();
+    form.hidden = false;
+    review.hidden = true;
+    steps.forEach((panel, index) => { panel.hidden = index !== step - 1; });
+    $('#step-status').textContent = `Step ${step} of 5`;
+    $('#step-name').textContent = stepNames[step - 1];
+    $('#progress-fill').style.width = `${step * 20}%`;
+    bar.setAttribute('aria-valuenow', String(step));
+    bar.removeAttribute('aria-valuetext');
+    $('#back').hidden = step === 1;
+    $('#next').firstChild.textContent = step === 5 ? 'Review request' : 'Next';
+    updateStairs();
+    if (focus) steps[step - 1].querySelector('legend').focus();
+  }
+  function fail(message, field) {
+    error.textContent = message;
+    field.setAttribute('aria-invalid', 'true');
+    field.focus();
     return false;
   }
-  if (step === 4 && !form.elements.phone.value.trim()) {
-    error.textContent = 'Please enter your phone number so Andre can call you.';
-    form.elements.phone.focus();
-    return false;
+  function validate() {
+    const data = getData();
+    clearError();
+    if (step === 1 && !data.job) return fail('Choose the work you need.', form.querySelector('[name="job"]'));
+    if (step === 2 && !/^\d{5}$/.test(data.zip)) return fail('Enter a 5-digit ZIP code.', $('#zip'));
+    if (step === 3) {
+      for (const field of [$('#size'), $('#stairs')]) {
+        if (!field.closest('[hidden]') && field.value && (!Number.isInteger(Number(field.value)) || Number(field.value) < 1)) {
+          return fail('Enter a whole number greater than zero, or leave this blank.', field);
+        }
+      }
+    }
+    if (step === 5) {
+      if (!data.name) return fail('Enter your name.', $('#name'));
+      if (data.phone.replace(/\D/g, '').length !== 10) return fail('Enter a 10-digit phone number.', $('#phone'));
+    }
+    return true;
   }
-  return true;
-}
-function makeSummary() {
-  const data = new FormData(form);
-  const photo = form.elements.photo.files[0];
-  const entries = [
-    ['Job', data.get('job')], ['ZIP code', data.get('zip')],
-    ['Rooms', data.getAll('rooms').join(', ') || 'Not specified'],
-    ['Approximate size', data.get('size') || 'Not sure'],
-    ['Photo', photo ? photo.name : 'No photo added'],
-    ['Name', data.get('name') || 'Not provided'], ['Phone', data.get('phone')]
-  ];
-  const list = document.querySelector('#summary-details');
-  list.replaceChildren();
-  entries.forEach(([label, value]) => {
-    const row = document.createElement('div');
-    const term = document.createElement('dt');
-    const detail = document.createElement('dd');
-    term.textContent = label;
-    detail.textContent = value;
-    row.append(term, detail);
-    list.append(row);
-  });
-}
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  if (!validate()) return;
-  if (step < 5) { step++; render(true); }
-  else {
+  form.addEventListener('change', updateStairs);
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!validate()) return;
+    if (step < 5) { showStep(step + 1); return; }
+    reviewData = getData();
+    $('#message-preview').textContent = PFEstimate.buildMessage(reviewData);
     form.hidden = true;
-    confirmation.hidden = false;
-    const heading = confirmation.querySelector('h3');
-    heading.setAttribute('tabindex', '-1');
-    heading.focus({ preventScroll: true });
-  }
-});
-back.addEventListener('click', () => { if (step > 0) step--; render(true); });
-document.querySelector('#edit').addEventListener('click', () => { step = 0; render(true); });
-document.querySelector('#restart').addEventListener('click', () => { step = 5; render(true); });
-document.querySelectorAll('[data-job]').forEach(link => link.addEventListener('click', () => {
-  const radio = [...form.querySelectorAll('[name="job"]')].find(input => input.value === link.dataset.job);
-  if (radio) radio.checked = true;
-  step = 0;
-  render();
-}));
-render();
+    review.hidden = false;
+    $('#step-status').textContent = 'Check your request';
+    $('#step-name').textContent = 'Ready to text';
+    bar.setAttribute('aria-valuetext', 'All five steps complete. Review your request.');
+    $('#send-status').textContent = '';
+    review.querySelector('h3').focus();
+  });
+  $('#back').addEventListener('click', () => showStep(Math.max(1, step - 1)));
+  $('#change-answers').addEventListener('click', () => showStep(1));
+  $('#send-request').addEventListener('click', () => {
+    PFEstimate.send(reviewData);
+    $('#send-status').textContent = 'If your messaging app did not open, you can copy the request above and text it to (303) 349-5952. Nothing is sent until you press send in your messaging app.';
+  });
+  document.querySelectorAll('[data-job]').forEach(link => {
+    link.addEventListener('click', () => {
+      const field = [...form.querySelectorAll('[name="job"]')].find(input => input.value === link.dataset.job);
+      if (field) field.checked = true;
+      showStep(1, false);
+    });
+  });
+
+  const dialog = $('#project-dialog');
+  const projectLinks = [...document.querySelectorAll('.project-mosaic .text-link')];
+  projectLinks.forEach(link => link.addEventListener('click', event => {
+    const figure = link.closest('figure');
+    const photo = figure.querySelector('img');
+    event.preventDefault();
+    const target = $('#dialog-photo');
+    target.src = photo.src;
+    target.alt = photo.alt;
+    target.width = photo.width;
+    target.height = photo.height;
+    $('#dialog-caption').textContent = figure.querySelector('h3').textContent;
+    dialog.showModal();
+  }));
+  $('.dialog-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  $('#google-reviews-link').addEventListener('click', event => {
+    event.preventDefault();
+    $('#reviews-note').hidden = !$('#reviews-note').hidden;
+  });
+  showStep(1, false);
+})();
